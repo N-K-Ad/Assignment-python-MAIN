@@ -43,6 +43,10 @@ Learn_button=Button(main_window, text='Learn', font=('Comic sans', 20), bg='gray
 Learn_button.pack(pady=20)
 back_Learn_button= Button(learn_window, text='Back', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= back_button_clicked)
 back_Learn_button.pack(pady=20)
+quit_button= Button(main_window, text='Quit', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit)
+quit_button.pack(pady=20)
+quit_button= Button(learn_window, text='Quit', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit)
+quit_button.pack(pady=20)
 #Variables
 
 mainloop()
