@@ -38,6 +38,7 @@ def learn_button_clicked():
 def back_button_clicked():
     learn_window.withdraw() 
     main_window.deiconify()  
+    Quiz_menu_window.withdraw() 
 
 #quiz menu button
 def quiz_menu_button_clicked():
@@ -65,14 +66,24 @@ Quiz_menu_button=Button(main_window, text='Quiz menu', font=('Comic sans', 20), 
 Quiz_menu_button.pack(pady=20)
 
 #learn window buttons
-back_Learn_button= Button(learn_window, text='Back', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= back_button_clicked)
-back_Learn_button.pack(pady=20)
+Main_button= Button(learn_window, text='Main Menu', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= back_button_clicked)
+Main_button.pack(pady=20)
 
 quit_button= Button(learn_window, text='Quit', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit)
 quit_button.pack(pady=20) #quit button
 
 Quiz_menu_button=Button(learn_window, text='Quiz menu', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quiz_menu_button_clicked)
 Quiz_menu_button.pack(pady=20)
+
+#Quiz menu window buttons
+Learn_button=Button(Quiz_menu_window, text='Learn', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= learn_button_clicked)
+Learn_button.pack(pady=20)
+
+Main_button= Button(learn_window, text='Main Menu', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= back_button_clicked)
+Main_button.pack(pady=20)
+
+quit_button= Button(Quiz_menu_window, text='Quit', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit)
+quit_button.pack(pady=20) #quit button
 
 #Variables
 
