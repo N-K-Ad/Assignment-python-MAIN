@@ -96,12 +96,78 @@ Quiz_menu_button.pack(pady=20)
 Learn_button=Button(Quiz_menu_window, text='Learn', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= learn_button_clicked)
 Learn_button.pack(pady=20)
 
-Main_button= Button(learn_window, text='Main Menu', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= back_button_clicked)
+Main_button= Button(Quiz_menu_window, text='Main Menu', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= back_button_clicked)
 Main_button.pack(pady=20)
 
 quit_button= Button(Quiz_menu_window, text='Quit', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit)
 quit_button.pack(pady=20) #quit button
 
 #Variables
+quiz_data = [
+    {
+        'question': 'What is the longest bone in the human body?',
+        'options': ['Femur', 'Tibia', 'Fibula', 'Humerus'],
+        'answer': 'Femur'
+    },
 
+    {
+        'question': 'How many bones are in the adult human body?',
+        'options': ['206', '208', '210', '212'],
+        'answer': '206'
+
+    },
+    {
+        'question': 'What bone protects the brain?',
+        'options': ['Skull', 'Mandible', 'Maxilla', 'Frontal bone'],
+        'answer': 'Skull'
+    },
+
+    {
+        'question': 'Which bone is known as the collarbone?',
+        'options': ['Clavicle', 'Scapula', 'Sternum', 'Humerus'],
+        'answer': 'Clavicle'
+    },
+
+    {
+        'question': 'What is the smallest bone in the human body?',
+        'options': ['Stapes', 'Incus', 'Malleus', 'Cochlea'],
+        'answer': 'Stapes' 
+    },
+    {
+        "question": 'How many vertebrae are in the human spine?',
+        "options": ['24', '26', '30', '32'],
+        "answer": '24'
+    },
+    {
+        "question": "what is the function of the ribcage?",
+        "options": ['Protects the heart and lungs', 'Supports the head', 'Allows for movement', 'Stores calcium'],
+        "answer": 'Protects the heart and lungs'
+    },
+    {
+        "question": "Babies born with more bones than adults?",
+        "options": ['True', 'False'],
+        "answer": 'True'
+    },
+    {
+        "question": "What is the name of the bone in the upper arm?",
+        "options": ['Humerus', 'Radius', 'Ulna', 'Scapula'],
+        "answer": 'Humerus'
+    },
+    {
+        "question": "What is the name of the bone in the thigh?",
+        "options": ['Femur', 'Tibia', 'Fibula', 'Patella'],
+        "answer": 'Femur'
+    },
+
+
+]
 mainloop()
+
+'''PLAN
+Difficulty levels will be based on the number of questions and number of mistakes tolerated
+EASY: 5 questions, inf mistakes
+MEDIUM: 10 questions, 3 mistakes
+HARD: 15 questions, 5 mistakes
+
+Scroll wheel will be for learn page and maybe quizs
+'''
