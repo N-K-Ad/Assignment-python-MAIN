@@ -46,6 +46,7 @@ def quiz_menu_button_clicked():
     learn_window.withdraw()  #hide the learn window
     main_window.withdraw()  #hide the main window
 
+#close all windows
 def closeall():
     try:
         main_window.destroy()
@@ -57,9 +58,10 @@ def closeall():
         Quiz_menu_window.destroy()
     except:pass
 
-main_window.protocol('WM_DELETE_WINDOW', closeall)
+#close everything when the x is clicked
+main_window.protocol('WM_DELETE_WINDOW', closeall) #WM_DELETE_WINDOW is the X button on the window
 learn_window.protocol("WM_DELETE_WINDOW", closeall)
-Quiz_menu_window.protocol('WM_DELETE_WINDOW', closeall)
+Quiz_menu_window.protocol('WM_DELETE_WINDOW', closeall) #protocol activates a function based on the window behavior
 
 #Labels
 Title_label=Label(main_window, text= 'Bones Quiz', font=('Impact', 40), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20)
