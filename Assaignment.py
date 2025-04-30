@@ -27,6 +27,25 @@ Quiz_menu_window.iconphoto(True,icon)
 Quiz_menu_window.config(bg='#5c5c5c')
 Quiz_menu_window.withdraw()  #hide the quiz menu window initially
 
+#frame
+main_frame= Frame(main_window)
+main_frame.pack(expand=1, fill=BOTH)
+#canvas
+my_canvas = Canvas(main_frame)
+my_canvas.pack( anchor=N, fill=BOTH, expand=1)
+
+#add scrollbar
+my_scrollbar= Scrollbar(main_frame, orient=VERTICAL, command=my_canvas.yview)
+my_scrollbar.pack(side=RIGHT, fill=Y)
+
+#configure the canvas
+my_canvas.configure(yscrollcommand=my_scrollbar.set)
+my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox('all')))
+#second frame
+second_frame= Frame(my_canvas)
+#add new canvas
+my_canvas.create_window((0,0), window=second_frame, anchor=NW)
+
 #Functions
 #learn button
 def learn_button_clicked():
@@ -73,13 +92,13 @@ message_label.place(anchor=CENTER, relx=0.5, rely=0.5)'''
 #Buttons
 
 #Main menu window buttons
-Learn_button=Button(main_window, text='Learn', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= learn_button_clicked)
+Learn_button=Button(second_frame, text='Learn', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= learn_button_clicked)
 Learn_button.pack(pady=20)
 
-quit_button= Button(main_window, text='Quit', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit)
+quit_button= Button(second_frame, text='Quit', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit)
 quit_button.pack(pady=20) #quit button
 
-Quiz_menu_button=Button(main_window, text='Quiz menu', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quiz_menu_button_clicked)
+Quiz_menu_button=Button(second_frame, text='Quiz menu', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quiz_menu_button_clicked)
 Quiz_menu_button.pack(pady=20)
 
 #learn window buttons
@@ -161,6 +180,12 @@ quiz_data = [
 
 
 ]
+import sys
+print(len(locals()))
+
+print(len(globals()))
+print(sys.getsizeof(locals()))
+print(sys.getsizeof(globals()))
 mainloop()
 
 '''PLAN
@@ -170,4 +195,5 @@ MEDIUM: 10 questions, 3 mistakes
 HARD: 15 questions, 5 mistakes
 
 Scroll wheel will be for learn page and maybe quizs
+current errors including, window closing does not allow for the code to run again and windows not showing   
 '''
