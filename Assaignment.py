@@ -55,7 +55,7 @@ main_frame.place(relx=0.5, rely= 0.5, anchor='center')
 main_frame.pack_propagate(False)  #prevent the frame from resizing to fit its contents
 main_frame.config(bg='#5c5c5c')
 
-second_frame= ctk.CTkScrollableFrame(master=Quiz_menu_window,height=720, width=1980 )
+second_frame= ctk.CTkScrollableFrame(master=Quiz_menu_window,height=920, width=1980 )
 second_frame.place(relx=0.5, rely= 0.5, anchor='center')
 
 #Variables
@@ -173,7 +173,7 @@ def next_question():
     if currentq < len(quiz_data):
         show_question()
     else:
-        feedback.config(text='Quiz completed! Your score is: {}/{}'.format(score, len(quiz_data)), fg='blue') #maybe try wrapping since its in a customtkinter frame
+        feedback.config(text='Quiz completed! Your score is: {}/{}. Navigate to the home or learn page, or quit via the icons on the top left :)'.format(score, len(quiz_data)), fg='blue') #maybe try wrapping since its in a custom tkinter frame
         for button in button_choices:
             button.config(state='disabled')
         next.config(state='disabled')
@@ -184,7 +184,7 @@ def show_question():
     choices = question['options']
     for i in range(4):
         button_choices[i].config(text=choices[i], state='normal')
-    feedback.config(text='', state='disabled')  
+    feedback.config(text='')  
     next.config(state='disabled')
 
 
@@ -203,8 +203,10 @@ question_label=Label(second_frame, anchor=CENTER, text='', font=('Comic sans', 2
 question_label.pack(pady=20)
 
 feedback= Label(second_frame, anchor=CENTER, text='', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20)
+feedback.pack(pady=20)
 
 score_label=Label(second_frame, anchor=CENTER, text='score: 0/{}'.format(len(quiz_data)), font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20)
+score_label.pack(pady=20)
 #Buttons
 #Main menu window buttons
 Learn_button=Button(main_window, text='Learn', font=('Comic sans', 20), bg='gray', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= learn_button_clicked)
