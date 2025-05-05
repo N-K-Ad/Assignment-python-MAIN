@@ -4,6 +4,7 @@ import customtkinter as ctk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 import tkinter.font as font
+import random
 
 #Overall GUI
 #Main window
@@ -73,7 +74,7 @@ score=0
 
 currentq=0
 
-quiz_data = [
+original_quiz_data = [
     {
         'question': 'What is the longest bone in the human body?',
         'options': ['Femur', 'Tibia', 'Fibula', 'Humerus'],
@@ -130,6 +131,8 @@ quiz_data = [
     },
 
 ]
+quiz_data = original_quiz_data.copy()
+random.shuffle(quiz_data) #shuffles quiz when program
 
 #Functions
 def reset_quiz():
@@ -138,6 +141,7 @@ def reset_quiz():
     currentq = 0
     score_label.config(text='score: 0/{}'.format(len(quiz_data)))
     show_question()
+
    
 #learn button
 def help_button_clickedmain():
