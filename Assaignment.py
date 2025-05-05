@@ -116,7 +116,7 @@ quiz_data = [
     {
         "question": "Who has the most bones at their age",
         "options": ['Teens','Adults','Babies', 'Elderly'],
-        "answer": 'True'
+        "answer": 'Babies'
     },
     {
         "question": "What is the name of the bone in the upper arm?",
@@ -320,13 +320,3 @@ print(len(globals()))
 print(sys.getsizeof(locals()))
 print(sys.getsizeof(globals()))
 mainloop()
-
-'''PLAN
-Difficulty levels will be based on the number of questions and number of mistakes tolerated
-EASY: 5 questions, inf mistakes
-MEDIUM: 10 questions, 3 mistakes
-HARD: 15 questions, 5 mistakes
-
-Scroll wheel will be for learn page and maybe quizs
-current errors including, window closing does not allow for the code to run again and windows not showing   
-'''
