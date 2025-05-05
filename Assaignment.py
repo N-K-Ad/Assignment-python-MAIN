@@ -15,6 +15,7 @@ main_window.geometry('1920x1080')
 icon = PhotoImage(file='Logo.png')
 main_window.iconphoto(True,icon)
 main_window.config(bg='white')
+main_window.resizable(False,False) #disables resizing of the window
 
 #Learn window
 learn_window=Toplevel()
@@ -24,6 +25,7 @@ icon = PhotoImage(file='Logo.png')
 learn_window.iconphoto(True,icon)
 learn_window.config(bg='white')
 learn_window.withdraw()  #hide the learn window initially
+learn_window.resizable(False,False) #disables resizing of the window
 
 #Quiz menu window
 Quiz_menu_window=Toplevel()
@@ -33,7 +35,7 @@ icon = PhotoImage(file='Logo.png')
 Quiz_menu_window.iconphoto(True,icon)
 Quiz_menu_window.config(bg='white')
 Quiz_menu_window.withdraw()  #hide the quiz menu window initially
-
+Quiz_menu_window.resizable(False,False) #disables resizing of the window
 # Open the image using Pillow
 home_image = Image.open('home.png')
 
@@ -63,12 +65,17 @@ help_image= Image.open('Help.png')
 resize_help= help_image.resize((30, 30))
 helptk= ImageTk.PhotoImage(resize_help)
 
+background_image = Image.open('Background.png')
+resizebg= background_image.resize((1920, 1080))
+backgroundtk= ImageTk.PhotoImage(resizebg)
+
 #frame
 main_frame= ctk.CTkScrollableFrame(master=learn_window,height=720, width=1980 )
 main_frame.place(relx=0.5, rely= 0.5, anchor='center')
 
 second_frame= ctk.CTkScrollableFrame(master=Quiz_menu_window,height=920, width=1980 )
 second_frame.place(relx=0.5, rely= 0.5, anchor='center')
+
 #Variables
 score=0
 
@@ -158,7 +165,7 @@ def help_button_clickedquiz():
     messagebox.showinfo(title='help',message='This is the Quiz page! Test yourself on the bones of the Human body! ' \
     'A question is given to you which you must answer via the multiple choice options. Your score will be displayed above and you will be told if the answer was correct or not.' \
     ' Then a final score given at the end of the quiz. You can navigate the app through the buttons on the top left.' \
-    'The home icon takes you to the main menu, the book takes you to the Learn page, and the X icon closes the app.')
+    'The home icon takes you to the main menu, the book takes you to the Learn page, clicking the clock restarts the quiz and the X icon closes the app.')
 
 def learn_button_clicked():
     learn_window.deiconify()  #show the learn window
@@ -177,6 +184,7 @@ def quiz_menu_button_clicked():
     learn_window.withdraw()  #hide the learn window
     main_window.withdraw()  #hide the main window
     reset_quiz()
+
 #close all windows
 def closeall():
     try:
@@ -209,7 +217,7 @@ def next_question():
     if currentq < len(quiz_data):
         show_question()
     else:
-        feedback.config(text='Quiz completed! Your score is: {}/{}. Navigate to the home or learn page, or quit via the icons on the top left :)'.format(score, len(quiz_data)), fg='blue') 
+        feedback.config(text='Quiz completed! Your score is: {}/{}. Navigate to the home or learn page, restart the quiz or quit via the icons on the top left :)'.format(score, len(quiz_data)), fg='blue') 
         for button in button_choices:
             button.config(state='disabled')
         next.config(state='disabled')
@@ -229,8 +237,17 @@ learn_window.protocol("WM_DELETE_WINDOW", closeall)
 Quiz_menu_window.protocol('WM_DELETE_WINDOW', closeall) #protocol activates a function based on the window behavior
 
 #Labels
-Title_label=Label(main_window, text= 'Bones Quiz', font=('Impact', 40), bg='yellow', fg='black', bd=10, relief=RAISED, padx=20, pady=20)
+Background = Label(main_window, image=backgroundtk)
+Background.place(relwidth=1, relheight=1)
+Background = Label(learn_window, image=backgroundtk)
+Background.place(relwidth=1, relheight=1)
+Background = Label(Quiz_menu_window, image=backgroundtk)
+Background.place(relwidth=1, relheight=1)
+
+Title_label = Label(main_window, text='Bones Quiz', font=('Impact', 40), bg='yellow', fg='black', bd=10, relief=RAISED, padx=20, pady=20)
 Title_label.pack()
+
+Title_label.lift()
 
 '''message_label= Label(main_window, text='', font=('Comic sans', 20), bg='yellow', fg='black', bd=10, relief=RAISED, padx=20, pady=20)
 message_label.place(anchor=CENTER, relx=0.5, rely=0.5)'''
@@ -257,6 +274,7 @@ info.pack(pady=20)
 diagram = PhotoImage(file='skeleton_diagram.png')
 info.config(image=diagram, compound='bottom')  # Set the image and text to be displayed together
 info.image = diagram  # Keep a reference to avoid garbage collection
+
 #Buttons
 #help button
 help = Button(main_window, text='help', font=('Comic sans', 20), bg='orange', fg='black', bd=10, relief=RAISED, padx=5, pady=5, command= help_button_clickedmain)
@@ -287,7 +305,7 @@ Main_button.place(y=10, x=10)
 
 Quiz_menu_button= Button(learn_window, text='Quit', font=('Gothic', 20), bg='orange', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quiz_menu_button_clicked, width=30, height=30)
 Quiz_menu_button.config(image=quiztk)
-Quiz_menu_button.place(y=10, x=70) #quit button
+Quiz_menu_button.place(y=10, x=70) #quiz button
 
 quit_button= Button(learn_window, anchor= NW, text='Quit', font=('Gothic', 20), bg='orange', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit, width=30, height=30)
 quit_button.config(image=quittk)
@@ -302,10 +320,13 @@ Main_button= Button(Quiz_menu_window,anchor= NW, text='Main Menu', font=('Gothic
 Main_button.config(image=hometk)
 Main_button.place(y=10, x=10)
 
+Quiz_menu_button= Button(Quiz_menu_window, text='Quit', font=('Gothic', 20), bg='orange', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quiz_menu_button_clicked, width=30, height=30)
+Quiz_menu_button.config(image=quiztk)
+Quiz_menu_button.place(y=10, x=130) #quiz button
+
 quit_button= Button(Quiz_menu_window, anchor= NW, text='Quit', font=('Gothic', 20), bg='orange', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command= quit, width=30, height=30)
 quit_button.config(image=quittk)
-quit_button.place(y=10, x=130,) #quit button
-
+quit_button.place(y=10, x=190,) #quit button
 button_choices = []
 for i in range(4):
     button = Button(second_frame, text='', font=('Gothic', 20), bg='orange', fg='black', bd=10, relief=RAISED, padx=20, pady=20, command=lambda i=i: check_answer(i))
@@ -314,6 +335,9 @@ for i in range(4):
 
 next = Button(second_frame, text='Next', font=('Gothic', 20), bg='orange', fg='black', bd=10, relief=RAISED, padx=20, pady=20, state='disabled', command=lambda: next_question())
 next.pack(pady=20)
+
+second_frame.lift()
+main_frame.lift()
 
 show_question()
 
