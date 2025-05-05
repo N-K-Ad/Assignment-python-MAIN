@@ -5,6 +5,7 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 import tkinter.font as font
 import random
+import sys
 
 #Overall GUI
 #Main window
@@ -341,10 +342,8 @@ main_frame.lift()
 
 show_question()
 
-import sys
 print(len(locals()))
-
 print(len(globals()))
 print(sys.getsizeof(locals()))
-print(sys.getsizeof(globals()))
+print(sys.getsizeof(globals())) #gets the length and size of the local and global variables
 mainloop()
